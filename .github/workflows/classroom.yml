@@ -1,0 +1,130 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Oppgave 0
+      id: oppgave-0
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 0
+        setup-command: ''
+        command: gradle test --tests Oppgave0Test
+        timeout: 1
+        max-score: 0
+    - name: Oppgave 1
+      id: oppgave-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 1
+        setup-command: ''
+        command: gradle test --tests Oppgave1Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 2
+      id: oppgave-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 2
+        setup-command: ''
+        command: gradle test --tests Oppgave2Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 3
+      id: oppgave-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 3
+        setup-command: ''
+        command: gradle test --tests Oppgave3Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 4
+      id: oppgave-4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 4
+        setup-command: ''
+        command: gradle test --tests Oppgave4Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 5
+      id: oppgave-5
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 5
+        setup-command: ''
+        command: gradle test --tests Oppgave5Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 6
+      id: oppgave-6
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 6
+        setup-command: ''
+        command: gradle test --tests Oppgave6Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 7
+      id: oppgave-7
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 7
+        setup-command: ''
+        command: gradle test --tests Oppgave7Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 8
+      id: oppgave-8
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 8
+        setup-command: ''
+        command: gradle test --tests Oppgave8Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 9
+      id: oppgave-9
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 9
+        setup-command: ''
+        command: gradle test --tests Oppgave9Test
+        timeout: 2
+        max-score: 1
+    - name: Oppgave 10
+      id: oppgave-10
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Oppgave 10
+        setup-command: ''
+        command: gradle test --tests Oppgave10Test
+        timeout: 2
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        OPPGAVE-0_RESULTS: "${{steps.oppgave-0.outputs.result}}"
+        OPPGAVE-1_RESULTS: "${{steps.oppgave-1.outputs.result}}"
+        OPPGAVE-2_RESULTS: "${{steps.oppgave-2.outputs.result}}"
+        OPPGAVE-3_RESULTS: "${{steps.oppgave-3.outputs.result}}"
+        OPPGAVE-4_RESULTS: "${{steps.oppgave-4.outputs.result}}"
+        OPPGAVE-5_RESULTS: "${{steps.oppgave-5.outputs.result}}"
+        OPPGAVE-6_RESULTS: "${{steps.oppgave-6.outputs.result}}"
+        OPPGAVE-7_RESULTS: "${{steps.oppgave-7.outputs.result}}"
+        OPPGAVE-8_RESULTS: "${{steps.oppgave-8.outputs.result}}"
+        OPPGAVE-9_RESULTS: "${{steps.oppgave-9.outputs.result}}"
+        OPPGAVE-10_RESULTS: "${{steps.oppgave-10.outputs.result}}"
+      with:
+        runners: oppgave-0,oppgave-1,oppgave-2,oppgave-3,oppgave-4,oppgave-5,oppgave-6,oppgave-7,oppgave-8,oppgave-9,oppgave-10
