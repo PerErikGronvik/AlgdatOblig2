@@ -2,20 +2,44 @@
 # Obligatorisk Oppgave 2 i DATS2300 - Algoritmer og Datastrukturer
 
 Denne oppgaven er en innlevering i DATS2300 - Algoritmer og datastrukturer. Den er innlevert av følgende studenter:
-* s123456@oslomet.no
-* s654321@oslomet.no
-* ...
+* pegro6469@oslomet.no
+
 
 ## Arbeidsfordeling
-I oppgaven har vi hatt følgende arbeidsfordeling:
-* s123456 har gjort oppgave 1, 3, og 5.
-* s654321 har gjort oppgave 2, 4, og 6.
-* Vi har samarbeidet om oppgave 7-10.
+Ønsker i utganspunktet å gjøre alle oppgavene, derfor er jeg ikke på gruppe.
 
 ## Oppgavebeskrivelser
 
 # Oppgave 1
-I oppgave 1 gjorde vi ...
+// Det kan være fristende bygge opp listen ved gjentatte kall på metoden
+leggInn() som vi skal kode i Oppgave 2. Dette skal man ikke gjøre, konstruktøren
+skal kodes direkte. Dette er fordi dersom man senere lagde en subklasse av
+DobbeltLenketListe og overskrev LeggInn() kunne det medført at konstruktøren
+ikke lenger virket. //
 
 # Oppgave 2
 I oppgave 2 gjorde vi ...
+
+# Oppgave 3
+
+# Oppgave 4
+
+# Oppgave 5
+
+# Oppgave 6
+
+# Oppgave 7  (Ikke obligatorisk)
+
+# Oppgave 8
+// Når dette er kodet, vil forEach-løkker fungere med klassen vår uten at vi
+trenger gjøre noe. Du kan sjekke at følgende kode virker:
+String[] frukt = {"Eple", "Pære", "Banan", "Mango", "Drue"};
+Liste<String> liste = new DobbeltLenketListe<>(frukt);
+for (String s : liste) System.out.print(s + " ");
+// Dette skal printe:
+// Eple Pære Banan Mango Drue
+//
+
+# Oppgave 9  (Ikke obligatorisk)
+
+# Oppgave 10 (Ikke obligatorisk)
