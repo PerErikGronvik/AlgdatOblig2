@@ -11,6 +11,8 @@ Denne oppgaven er en innlevering i DATS2300 - Algoritmer og datastrukturer. Den 
 ## Oppgavebeskrivelser
 
 # Oppgave 1
+
+Jeg startet med å være veldig forvirret. 
 // Det kan være fristende bygge opp listen ved gjentatte kall på metoden
 leggInn() som vi skal kode i Oppgave 2. Dette skal man ikke gjøre, konstruktøren
 skal kodes direkte. Dette er fordi dersom man senere lagde en subklasse av

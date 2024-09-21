@@ -2,6 +2,7 @@ package no.oslomet.cs.algdat;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
     // Innebygd (Trenger ikke endres)
@@ -41,20 +42,38 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe() {
         hode = null;
         hale = null;
-        int antall = 0;
+        antall = 0;
+        endringer = 0;
         //Lag konstruktøren public DobbeltLenketListe() så den genererer en tom
         //dobbelt lenket liste
     }
 
-    public DobbeltLenketListe(T[] a) {
-        //Lag konstruktøren public DobbeltLenketListe(T[] a) så den genererer
+    public DobbeltLenketListe(T[] a) { // T for type, fordi type ville vært for selvforklarende.
+        Objects.requireNonNull(a,"a er null");
+        hode = 0;
+        hale = 0;
+        antall = 0;
+        endringer = 0;
+
+
+        int forrigeNodeIndex=1;
+            for (int i = 1; i < a.length-1; i++) {
+                if (a[i] != null) {
+                    hode = null;//Fordi siste element
+                    hale = forrigeNodeIndex;
+                    forrigeNodeIndex=i;
+
+                }
+            }
+        }
+        //konstruktøren genererer
         //en dobbelt lenket liste bestående av ikke-null-verdier fra a.
         //– Dersom a er null-pekeren, skal metoden kaste en NullPointerException
         //(bruk for eksempel Objects.requireNonNull).
         //– Dersom a inneholder null-verdier, skal disse hoppes over. Om for
         //eksempel a kun består av null-verdier, sitter vi da igjen med ei tom
         //liste.
-        throw new UnsupportedOperationException();
+
     }
 
     @Override
