@@ -39,9 +39,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     // Oppgave 1
     public DobbeltLenketListe() {
+        hode = null;
+        hale = null;
+        int antall = 0;
         //Lag konstruktøren public DobbeltLenketListe() så den genererer en tom
         //dobbelt lenket liste
-        throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
