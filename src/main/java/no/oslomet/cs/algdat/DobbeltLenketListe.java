@@ -57,15 +57,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
         int forrigeNodeIndex=1;
-            for (int i = 1; i < a.length-1; i++) {
-                if (a[i] != null) {
-                    hode = null;//Fordi siste element
-                    hale = forrigeNodeIndex;
-                    forrigeNodeIndex=i;
-
-                }
+        for (int i = 1; i < a.length-1; i++) {
+            if (a[i] != null) {
+                hode = null;//Fordi siste element
+                hale = forrigeNodeIndex;
+                forrigeNodeIndex=i;
+                antall++;
             }
         }
+
         //konstruktøren genererer
         //en dobbelt lenket liste bestående av ikke-null-verdier fra a.
         //– Dersom a er null-pekeren, skal metoden kaste en NullPointerException
