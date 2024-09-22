@@ -93,18 +93,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean tom() {
         //Lag metoden public boolean tom(), som skal returnere true dersom lista
         //er tom, og false dersom den ikke er tom.
-        return antall == 0;
+        return antall == 0; //  En logisk sammenligning returnerer tue eller false
     }
 
     // Oppgave 2
     @Override
     public String toString() {
-        //Lag metoden public String toString(). Den skal returnere en tegnstreng
-        //med listens verdier, omringet av klammeparenteser. Om lista er tom, får man
-        //da "[]", og om lista inneholder verdiene 1, 2, og 3, får man da "[1, 2, 3]".
-        //Merk mellomrom etter komma. Metoden skal lage strengen ved å følge neste-
-        //pekerne i lista.
-        //2
+        // Den skal returnere en tegnstreng
+        // med listens verdier, omringet av klammeparenteser. Om lista er tom, får man
+        // da "[]", og om lista inneholder verdiene 1, 2, og 3, får man da "[1, 2, 3]".
+        // Merk mellomrom etter komma. Metoden skal lage strengen ved å følge neste-
+        // pekerne i lista.
+        // 2
+        // (toString)
+
         throw new UnsupportedOperationException();
     }
 
