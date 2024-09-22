@@ -72,9 +72,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     // Oppdaterer nodens pekere
                     nyNode.forrige = hale;
                     nyNode.neste = null;
-                    // Opdaterer forrige peker, som er lagret i hale
+                    // Oppdaterer forrige peker, som er lagret i hale
                     hale.neste=nyNode;
-                    // Nå som vi er ferdie setter vi Noden til å være halen
+                    // Nå som vi er ferdige setter vi Noden til å være halen
                     hale = nyNode;
                 }
                 antall++;
@@ -106,8 +106,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // pekerne i lista.
         // 2
         // (toString)
+        String ut = "[";
+        Node temp = hale;
+        for (int i = 0; i < antall; i++) {
+            if (i==0){
+                ut += temp.toString();
 
-        throw new UnsupportedOperationException();
+            } else {
+                ut += ", "+ temp.toString();
+
+            }
+            if (temp.neste != null){// sjekker om det er en neste node
+                temp = temp.neste;//flytter til neste node
+            }
+        }
+        ut += "]";
+        return ut;
     }
 
     public String omvendtString() {
