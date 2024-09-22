@@ -50,43 +50,50 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe(T[] a) { // T for type, fordi type ville vært for selvforklarende.
         Objects.requireNonNull(a,"a er null");
-        hode = 0;
-        hale = 0;
+        //tom liste
+        hode = null;
+        hale = null;
         antall = 0;
         endringer = 0;
 
+        // legger arrayet inn en dobbel lenket liste, hopper over nullverdier.
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != null) { // hopper over null verdier
+                Node<T> nyNode= new Node(a[i]); //definerer noden vi skal bruke
 
-        int forrigeNodeIndex=1;
-        for (int i = 1; i < a.length-1; i++) {
-            if (a[i] != null) {
-                hode = null;//Fordi siste element
-                hale = forrigeNodeIndex;
-                forrigeNodeIndex=i;
+                if (hode == null) { //dette er den første noden
+                    //Er bare denne noden derfor er den hale og hode
+                    hode = nyNode;
+                    hale = nyNode;
+                    // Har ingen adjecent noder.
+                    nyNode.forrige = null;
+                    nyNode.neste = null;
+                } else { // dette er en ny ikke null node
+                    // Oppdaterer nodens pekere
+                    nyNode.forrige = hale;
+                    nyNode.neste = null;
+                    // Opdaterer forrige peker, som er lagret i hale
+                    hale.neste=nyNode;
+                    // Nå som vi er ferdie setter vi Noden til å være halen
+                    hale = nyNode;
+                }
                 antall++;
             }
         }
-
-        //konstruktøren genererer
-        //en dobbelt lenket liste bestående av ikke-null-verdier fra a.
-        //– Dersom a er null-pekeren, skal metoden kaste en NullPointerException
-        //(bruk for eksempel Objects.requireNonNull).
-        //– Dersom a inneholder null-verdier, skal disse hoppes over. Om for
-        //eksempel a kun består av null-verdier, sitter vi da igjen med ei tom
-        //liste.
-
     }
 
     @Override
     public int antall() {
+
         //Lag metoden public int antall(), som skal returnere antall verdier i lista.
-        throw new UnsupportedOperationException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
         //Lag metoden public boolean tom(), som skal returnere true dersom lista
         //er tom, og false dersom den ikke er tom.
-        throw new UnsupportedOperationException();
+        return antall == 0;
     }
 
     // Oppgave 2

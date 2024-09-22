@@ -12,7 +12,7 @@ Denne oppgaven er en innlevering i DATS2300 - Algoritmer og datastrukturer. Den 
 
 # Oppgave 1
 
-Jeg startet med å være veldig forvirret. 
+Jeg startet med å være veldig forvirret. Det virket ikke som om oppgaven var ferdigskrevet. Jeg brukte generate constructor, men denne var lite hjelpsom. 
 // Det kan være fristende bygge opp listen ved gjentatte kall på metoden
 leggInn() som vi skal kode i Oppgave 2. Dette skal man ikke gjøre, konstruktøren
 skal kodes direkte. Dette er fordi dersom man senere lagde en subklasse av
