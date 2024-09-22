@@ -107,7 +107,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // 2
         // (toString)
         String ut = "[";
-        Node temp = hale;
+        Node temp = hode;
         for (int i = 0; i < antall; i++) {
             if (i==0){
                 ut += temp.toString();
@@ -129,7 +129,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //en tegnstreng med listens verdier i motsatt rekkefølge, omringet av
         //klammeparenteser. Metoden skal lage strengen ved å følge forrige-pekerne
         //i lista.
-        throw new UnsupportedOperationException();
+
+        String ut = "[";
+        Node temp = hale;
+        for (int i = 0; i < antall; i++) {
+            if (i==0){
+                ut += temp.toString();
+
+            } else {
+                ut += ", "+ temp.toString();
+
+            }
+            if (temp.forrige != null){// sjekker om det er en neste node
+                temp = temp.forrige;//flytter til neste node
+            }
+        }
+        ut += "]";
+        return ut;
     }
 
     @Override
