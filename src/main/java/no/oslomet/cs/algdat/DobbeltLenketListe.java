@@ -192,7 +192,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> ut=null;
         if (indeks < (antall / 2)) { //rundes ned.
             ut = hode;
-            for (int i = 0; i <= indeks; i++) { //index 0=hode index 1= nr1 -> stop pga i=indexs
+            for (int i = 0; i < indeks; i++) { //index 0=hode index 1= nr1 -> stop pga i=indexs
                 ut=ut.neste; // gå framover fra hode
             }
         }
@@ -211,21 +211,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        //Lag metoden public T hent(int indeks), som henter ut verdi-
-        //en på den gitte posisjonen, ved hjelp av finnNode. Bruk meto-
+        // Bruk meto-
         //den indeksKontroll(int indeks, boolean leggInn) som er arvet fra
-        //Liste til å sjekke at den innsendte indeksen er en lovlig indeks. Siden vi ikke
+        //Liste til å sjekke at den innsendte indeksen er en lovlig indeks.
+        // Siden vi ikke
         //skal legge noe inn i lista, settes leggInn til false.
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks,false); //åja den leggInn
+
+        //Lag metoden public T hent(int indeks), som henter ut verdi-
+        //en på den gitte posisjonen, ved hjelp av finnNode.
+        Node<T> ut = finnNode(indeks);
+        return ut.verdi;
     }
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
+        // Sjekker etter lovlig indeks
+        indeksKontroll(indeks,false);
+        Node<T> ut= finnNode(indeks);
+
+        //erstatt index
+
+
         //Lag metoden public T oppdater(int indeks, T nyverdi), som erstat-
         //ter verdien på plass indeks med nyverdi, og returnerer det som lå der før.
         //Husk å sjekke etter lovlige indekser. Variabelen endringer skal økes når lista
         //oppdateres.
-        throw new UnsupportedOperationException();
+        endringer++;
+        return ut.verdi;
     }
 
 
