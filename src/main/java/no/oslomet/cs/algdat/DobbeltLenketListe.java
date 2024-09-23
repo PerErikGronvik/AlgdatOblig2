@@ -40,8 +40,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     // Oppgave 1
     public DobbeltLenketListe() {
-        hode = null;
-        hale = null;
         antall = 0;
         endringer = 0;
         //Lag konstruktøren public DobbeltLenketListe() så den genererer en tom
@@ -51,8 +49,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe(T[] a) { // T for type, fordi type ville vært for selvforklarende.
         Objects.requireNonNull(a,"a er null");
         //tom liste
-        hode = null;
-        hale = null;
         antall = 0;
         endringer = 0;
 
@@ -105,23 +101,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // Merk mellomrom etter komma. Metoden skal lage strengen ved å følge neste-
         // pekerne i lista.
         // 2
-        // (toString)
-        String ut = "[";
-        Node temp = hode;
+
+
+
+        // OBS
+        // Bruk stringbuilder
+        // StringBuilder str = new StringBuilder();
+        // str.append("GFG"); fra Geeks for geeks
+        // sout(str.toString())
+        StringBuilder ut = new StringBuilder();
+        ut.append("[");
+
+        Node<T> temp = hode;
+
         for (int i = 0; i < antall; i++) {
             if (i==0){
-                ut += temp.toString();
+                ut.append(temp.verdi);
 
             } else {
-                ut += ", "+ temp.toString();
-
+                ut.append(", ").append(temp.verdi);
             }
             if (temp.neste != null){// sjekker om det er en neste node
                 temp = temp.neste;//flytter til neste node
             }
         }
-        ut += "]";
-        return ut;
+        ut.append("]");
+        return ut.toString();
     }
 
     public String omvendtString() {
@@ -130,22 +135,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //klammeparenteser. Metoden skal lage strengen ved å følge forrige-pekerne
         //i lista.
 
-        String ut = "[";
-        Node temp = hale;
+        StringBuilder ut = new StringBuilder();
+        ut.append("[");
+
+        Node<T> temp = hale;
+
         for (int i = 0; i < antall; i++) {
             if (i==0){
-                ut += temp.toString();
+                ut.append(temp.verdi);
 
             } else {
-                ut += ", "+ temp.toString();
-
+                ut.append(", ").append(temp.verdi);
             }
             if (temp.forrige != null){// sjekker om det er en neste node
                 temp = temp.forrige;//flytter til neste node
             }
         }
-        ut += "]";
-        return ut;
+        ut.append("]");
+        return ut.toString();
     }
 
     @Override
@@ -154,18 +161,48 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //NullPointerException dersom du prøver legge inn en null-verdi, og ellers
         //legge til en ny node med oppgitt verdi bakerst i listen, og returnere true. Øk
         //variabelen endringer hver gang en ny verdi legges inn
-        throw new UnsupportedOperationException();
+        Objects.requireNonNull(verdi,"Ikke lov å legge inn null verdi");
+
+        //Temp variabel
+        Node<T> nyNode= new Node<>(verdi);
+
+
+        //legg til node bakerst i listen
+        if (antall==0) { //Settes inn i tom liste
+            hode=nyNode;
+            hale=nyNode;
+        }else { //Settes inn i vanlig liste
+            nyNode.forrige = hale;
+            nyNode.neste = null;
+            // Oppdaterer forrige peker, som er lagret i hale
+            hale.neste = nyNode;
+            // Nå som vi er ferdige setter vi Noden til å være halen
+            hale = nyNode;
+        }
+        endringer++;
+        antall++;
+        return true;
     }
 
     // Oppgave 3
     private Node<T> finnNode(int indeks) {
         //Lag den private metoden private Node<T> finnNode(int indeks), som
-        //returnerer noden med den gitte posisjonen.
         //– Dersom indeksen er mindre enn halvparten av antallet, skal metoden
         //starte fra hodet og følge neste-pekere.
+        if (indeks > ((double) antall / 2)) {
+            Node<T> ut= new Node<>();
+            ut = hode;
+            for (int i = 1; i < indeks; i++) {
+
+            }
+        }
         //– Dersom indeksen er større enn eller lik halvparten av antallet, skal
         //metoden starte fra halen, og følge forrige-pekere.
-        throw new UnsupportedOperationException();
+        if (indeks <= ((double) antall / 2)) {
+
+        }
+        //returnerer noden med den gitte posisjonen.
+        return; //node indeks
     }
 
     @Override
