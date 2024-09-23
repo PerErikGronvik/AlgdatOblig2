@@ -189,20 +189,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Lag den private metoden private Node<T> finnNode(int indeks), som
         //– Dersom indeksen er mindre enn halvparten av antallet, skal metoden
         //starte fra hodet og følge neste-pekere.
-        if (indeks > ((double) antall / 2)) {
-            Node<T> ut= new Node<>();
+        Node<T> ut=null;
+        if (indeks < (antall / 2)) { //rundes ned.
             ut = hode;
-            for (int i = 1; i < indeks; i++) {
-
+            for (int i = 0; i <= indeks; i++) { //index 0=hode index 1= nr1 -> stop pga i=indexs
+                ut=ut.neste; // gå framover fra hode
             }
         }
         //– Dersom indeksen er større enn eller lik halvparten av antallet, skal
         //metoden starte fra halen, og følge forrige-pekere.
-        if (indeks <= ((double) antall / 2)) {
-
+        if (indeks >= ( antall / 2)) { //rundes ned
+            ut = hale;
+            for (int i = antall-1; i > indeks; i--) { // index siste = hale
+                ut=ut.forrige; // gå bakover fra hale
+            }
         }
+
         //returnerer noden med den gitte posisjonen.
-        return; //node indeks
+        return ut;
     }
 
     @Override
