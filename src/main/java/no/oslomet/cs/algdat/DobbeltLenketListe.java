@@ -298,6 +298,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Oppgave 5
     @Override
     public void leggInn(int indeks, T verdi) {
+        indeksKontroll(indeks,true);
+        Objects.requireNonNull(verdi);
+
+        // velg nåNoden som er på indeksen, lagre denne.
+        // lag en nyNyode
+        // nyNode.neste peker på nåNoden
+        // nyNode.forrige peker på nåNoden.forrige
+        // hent nånoden.forrige, skal peke på nyNode.
+        // nånoden.forrige peker på nyNode
+        // han nå satt inn ny node
+
+
+
+
+
+
+
         //som legger inn verdi i lista på posisjon indeks. Alle andre verdier vil da
         //flyttes videre til neste indeks. Pass på at metoden kan legge inn i tom liste,
         //i starten av liste, i slutten av liste, og i midten av liste. Bruk metoden
@@ -308,7 +325,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //plasseres først eller sist. Pass også på at både antall og endringer økes når en
         //verdi legges til. Det skal fremdeles ikke være lov å legge inn nullpekere i lista, og
         //dette skal kaste en NullPointerException
-        throw new UnsupportedOperationException();
+        antall++;
+        endringer++;
     }
 
     // Oppgave 6
