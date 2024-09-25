@@ -1,5 +1,6 @@
 package no.oslomet.cs.algdat;
 
+import java.awt.geom.IllegalPathStateException;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
@@ -226,47 +227,72 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
+        // Nullverdihåndtering
+        Objects.requireNonNull(nyverdi,"Ikke lov å legge inn null verdi");
         // Sjekker etter lovlig indeks
         indeksKontroll(indeks,false);
-        Node<T> ut= finnNode(indeks);
 
+        //Lagrer gammel verdi og oppretter
+        Node<T> erstatt= finnNode(indeks);
+        T ut=erstatt.verdi;
+        erstatt.verdi = nyverdi;
         //erstatt index
-
 
         //Lag metoden public T oppdater(int indeks, T nyverdi), som erstat-
         //ter verdien på plass indeks med nyverdi, og returnerer det som lå der før.
         //Husk å sjekke etter lovlige indekser. Variabelen endringer skal økes når lista
         //oppdateres.
         endringer++;
-        return ut.verdi;
+        return ut;
     }
 
 
     public Liste<T> subliste(int fra, int til) {
-        //Lag metoden public Liste<T> subliste(int fra, int til), som re-
-        //turnerer en ny liste (en instans av DobbeltLenketListe) som inneholder
+
+        fraTilKontroll(fra, til);
+        //generer liste
+        DobbeltLenketListe<T> nyListe= new DobbeltLenketListe<>();
+
+        for (int i = fra; i < til; i++) {
+            nyListe.leggInn(hent(i));
+        }
+
+        // som re-turnerer en ny liste (en instans av DobbeltLenketListe) som inneholder
         //verdiene i det halvåpne intervallet [fra, til⟩ fra lista denne kalles fra. Bruk
         //metoden fraTilKontroll(int fra, int til) for å sjekke om indeksene
         //er lovlige. Et tomt intervall er lovlig, og skal gi ut en tom liste. Pass på at
         //den nye lista har riktig antall.
-        throw new UnsupportedOperationException();
+
+        return nyListe;
     }
 
     // Oppgave 4
     @Override
     public int indeksTil(T verdi) {
-        //Lag metoden public int indeksTil(T verdi), som returnerer indeksen
+        //tenk Finn indeks til verdi
+        int ut = -1;
+        for (int i = 0; i < antall; i++) {
+            if (hent(i).equals(verdi)) {
+                ut = i;
+                break;
+            }
+        }
+        //returnerer indeksen
         //til første element med den gitte verdien i lista, eller −1 dersom verdien ikke
         //finnes i lista. Det skal ikke kastes et unntak dersom verdi er null.
-        throw new UnsupportedOperationException();
+        return ut;
     }
 
     @Override
     public boolean inneholder(T verdi) {
-        //Lag metoden public boolean inneholder(T verdi), som returnerer
+        //boolean ut=true;
+        //if (indeksTil(verdi) == -1) {
+        //   return false;
+        //}
+        //som returnerer
         //true dersom den gitte verdien finnes i lista, og false dersom den ikke
         //finnes i lista. Du kan gjerne bruke indeksTil som hjelpemetode.
-        throw new UnsupportedOperationException();
+        return indeksTil(verdi) != -1; //is this a crime
     }
 
     // Oppgave 5
