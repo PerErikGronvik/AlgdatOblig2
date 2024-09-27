@@ -301,19 +301,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         indeksKontroll(indeks,true);
         Objects.requireNonNull(verdi);
 
-        // velg nåNoden som er på indeksen, lagre denne.
-        // lag en nyNyode
-        // nyNode.neste peker på nåNoden
-        // nyNode.forrige peker på nåNoden.forrige
-        // hent nånoden.forrige, skal peke på nyNode.
-        // nånoden.forrige peker på nyNode
-        // han nå satt inn ny node
 
+        // velg noder og gi de navn.
+        Node<T> høyre = finnNode(indeks);
+        Node<T> venstre = finnNode(indeks-1);
 
+        // lag en nyNyode midten
+        Node<T> midten = new Node<T>(verdi,venstre,høyre);
 
-
-
-
+        // ordner pekere
+        venstre.neste = midten;
+        høyre.forrige = midten;
 
         //som legger inn verdi i lista på posisjon indeks. Alle andre verdier vil da
         //flyttes videre til neste indeks. Pass på at metoden kan legge inn i tom liste,
