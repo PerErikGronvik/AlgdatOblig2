@@ -310,7 +310,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             nyNode.neste=hode;
             hode.forrige=nyNode;
             hode=nyNode;
-        }}  else if (indeks == antall) { //slutten
+        }}  else if (indeks == antall) { //slutten Her skal det vær antall -1 men tror det er feil i fasiten.
             nyNode.forrige = hale;
             hale.neste = nyNode;
             hale = nyNode;
@@ -346,34 +346,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T fjern(int indeks) {
 
-        //jerner og returnerer
+        //fjerner og returnerer
         //verdien på posisjon indeks. Du skal kaste IndexOutOfBoundsException
         //om du prøver fjerne en indeks som ikke eksisterer.
         //må derfor kodes direkte.
         //return;
-
-        indeksKontroll(indeks,false);
         //Må kodes manuelt og throw index out of bounds.
-        Objects.requireNonNull(indeks,"Nullverdi er ikke godtatt");
+        indeksKontroll(indeks,false);
+
         // velg noder og gi de navn.
         Node<T> slettNode = finnNode(indeks);
+        T ut = slettNode.verdi;
 
         if (indeks == 0 ) { //starten
-            if (antall==0){//tom
-                throw new IndexOutOfBoundsException();
-            } else { // ikke tom
                 hode = slettNode.neste;
-                slettNode.forrige=hode;
+                if(hode != null){ //listen er ikke blitt tom
+                    hode.forrige=null;
+                }
                 slettNode.forrige=null;
                 slettNode.neste=null;
 
-            }}  else if (indeks == antall) { //slutten
+            }  else if (indeks == antall-1) { //slutten
                 hale = slettNode.forrige;
-                slettNode.forrige=hale;
+                //tom liste er håndtert
+                hale.neste=null;
                 slettNode.forrige=null;
                 slettNode.neste=null;
 
-        } else {
+        } else { //midten
             Node<T> venste = slettNode.forrige;
             Node<T> høyre =  slettNode.neste;
 
@@ -381,17 +381,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             slettNode.forrige=null;
 
             venste.neste= høyre;
-            høyre.neste = venste;
+            høyre.forrige = venste;
 
         }
         antall--;
         endringer++;
-        return finnNode(indeks).verdi;
+        return ut;
 
     }
 
     @Override
     public boolean fjern(T verdi) {
+        boolean ut = false;
+        if (indeksTil(verdi)==-1){ //tom
+            //ikke gjør noe, finner ikke verdien
+        } else {
+            fjern(indeksTil(verdi));
+        }
+
         //om prøver å fjerne første
         //instans av verdien verdi. Den returnerer true dersom den finner og fjerner
         //verdien, og false dersom den ikke finner verdien.
@@ -403,7 +410,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //antall og endringer må oppdateres ved at antall reduseres og endringer
         //økes, dersom noe fjernes.
         //4
-        throw new UnsupportedOperationException();
+        return ut;
+
     }
 
     // Oppgave 7  Ikke obligatorisk
