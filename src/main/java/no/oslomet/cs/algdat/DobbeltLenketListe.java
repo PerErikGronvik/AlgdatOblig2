@@ -299,19 +299,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void leggInn(int indeks, T verdi) {
         indeksKontroll(indeks,true);
-        Objects.requireNonNull(verdi);
-
-
+        Objects.requireNonNull(verdi,"Nullverdi er ikke godtatt");
         // velg noder og gi de navn.
-        Node<T> høyre = finnNode(indeks);
-        Node<T> venstre = finnNode(indeks-1);
+        Node<T> nyNode = new Node<>(verdi);
+        if (indeks == 0 ) { //starten
+            if (antall==0){//tom
+            hode = nyNode;
+            hale = nyNode;
+            } else { // ikke tom
+            nyNode.neste=hode;
+            hode.forrige=nyNode;
+            hode=nyNode;
+        }}  else if (indeks == antall) { //slutten
+            nyNode.forrige = hale;
+            hale.neste = nyNode;
+            hale = nyNode;
+        } else {// midt i
+            Node<T> høyre = finnNode(indeks);
+            Node<T> venstre = høyre.forrige;
+            //sett inn ny node
 
-        // lag en nyNyode midten
-        Node<T> midten = new Node<T>(verdi,venstre,høyre);
+            venstre.neste = nyNode;
+            høyre.forrige = nyNode;
+            nyNode.forrige=venstre;
+            nyNode.neste=høyre;
 
-        // ordner pekere
-        venstre.neste = midten;
-        høyre.forrige = midten;
+
+        }
+
 
         //som legger inn verdi i lista på posisjon indeks. Alle andre verdier vil da
         //flyttes videre til neste indeks. Pass på at metoden kan legge inn i tom liste,
@@ -330,11 +345,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Oppgave 6
     @Override
     public T fjern(int indeks) {
+        throw new UnsupportedOperationException();
+
         //jerner og returnerer
         //verdien på posisjon indeks. Du skal kaste IndexOutOfBoundsException
         //om du prøver fjerne en indeks som ikke eksisterer.
         //må derfor kodes direkte.
-        throw new UnsupportedOperationException();
+        //return;
+
     }
 
     @Override
@@ -371,7 +389,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
-    // Oppgave 8
+    // Oppgave 8 og 9
 
     @Override
     public Iterator<T> iterator() {
@@ -451,6 +469,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new UnsupportedOperationException();
         }
     }
+
 
     // Oppgave 10 Ikke obligatorisk
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
