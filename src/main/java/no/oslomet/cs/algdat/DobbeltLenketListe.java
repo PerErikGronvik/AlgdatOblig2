@@ -363,27 +363,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 if(hode != null){ //listen er ikke blitt tom
                     hode.forrige=null;
                 }
-                slettNode.forrige=null;
-                slettNode.neste=null;
-
-            }  else if (indeks == antall-1) { //slutten
+        }  else if (indeks == antall-1) { //slutten
                 hale = slettNode.forrige;
                 //tom liste er håndtert
                 hale.neste=null;
-                slettNode.forrige=null;
-                slettNode.neste=null;
-
         } else { //midten
             Node<T> venste = slettNode.forrige;
             Node<T> høyre =  slettNode.neste;
 
-            slettNode.neste=null;
-            slettNode.forrige=null;
-
             venste.neste= høyre;
             høyre.forrige = venste;
-
         }
+        slettNode.neste=null;
+        slettNode.forrige=null;
+
         antall--;
         endringer++;
         return ut;
@@ -393,17 +386,51 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean fjern(T verdi) {
         boolean ut = false;
-        if (indeksTil(verdi)==-1){ //tom
-            //ikke gjør noe, finner ikke verdien
-        } else {
-            fjern(indeksTil(verdi));
-        }
 
-        //om prøver å fjerne første
+        //indeks til metoden
+            int indeks = -1;
+            for (int i = 0; i < antall; i++) {
+                if (hent(i).equals(verdi)) {
+                    ut = true;
+                    indeks=i;
+                    Node<T> slettNode =;
+
+                    if (indeks == 0 ) { //starten
+                        hode = slettNode.neste;
+                        if(hode != null){ //listen er ikke blitt tom
+                            hode.forrige=null;
+                        }
+                    }  else if (indeks == antall-1) { //slutten
+                        hale = slettNode.forrige;
+                        //tom liste er håndtert
+                        hale.neste=null;
+                    } else { //midten
+                        Node<T> venste = slettNode.forrige;
+                        Node<T> høyre =  slettNode.neste;
+
+                        venste.neste= høyre;
+                        høyre.forrige = venste;
+                    }
+                    slettNode.neste=null;
+                    slettNode.forrige=null;
+                    if (ut = true) {
+                        antall--;
+                        endringer++;
+                    }
+
+                    break;
+                }
+            }
+
+
+
+
+        //• Lag metoden public boolean fjern(T verdi), som prøver å fjerne første
         //instans av verdien verdi. Den returnerer true dersom den finner og fjerner
         //verdien, og false dersom den ikke finner verdien.
-        //må derfor kodes direkte.
-
+        //Det kan være fristende å kode fjern(T verdi) ved hjelp av indeksTil(T verdi)
+        //og fjern(int indeks), men dette medfører at vi løper gjennom lista to ganger i
+        //stedet for én gang. Metoden fjern(T verdi) må derfor kodes direkte.
         //Pass på at metodene fungerer på en tom liste, på en liste med ett element, om
         //første element fjernes, om siste element fjernes, og om et element i slutten fjernes.
         //Noden som fjernes bør sette sine forrige og neste-pekere til null. Verdiene
