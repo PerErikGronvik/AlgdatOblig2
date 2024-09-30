@@ -345,13 +345,48 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Oppgave 6
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
 
         //jerner og returnerer
         //verdien på posisjon indeks. Du skal kaste IndexOutOfBoundsException
         //om du prøver fjerne en indeks som ikke eksisterer.
         //må derfor kodes direkte.
         //return;
+
+        indeksKontroll(indeks,false);
+        //Må kodes manuelt og throw index out of bounds.
+        Objects.requireNonNull(indeks,"Nullverdi er ikke godtatt");
+        // velg noder og gi de navn.
+        Node<T> slettNode = finnNode(indeks);
+
+        if (indeks == 0 ) { //starten
+            if (antall==0){//tom
+                throw new IndexOutOfBoundsException();
+            } else { // ikke tom
+                hode = slettNode.neste;
+                slettNode.forrige=hode;
+                slettNode.forrige=null;
+                slettNode.neste=null;
+
+            }}  else if (indeks == antall) { //slutten
+                hale = slettNode.forrige;
+                slettNode.forrige=hale;
+                slettNode.forrige=null;
+                slettNode.neste=null;
+
+        } else {
+            Node<T> venste = slettNode.forrige;
+            Node<T> høyre =  slettNode.neste;
+
+            slettNode.neste=null;
+            slettNode.forrige=null;
+
+            venste.neste= høyre;
+            høyre.neste = venste;
+
+        }
+        antall--;
+        endringer++;
+        return finnNode(indeks).verdi;
 
     }
 
