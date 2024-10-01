@@ -385,52 +385,43 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        boolean ut = false;
+        if (hode == null) { //listen er tom
+            return false;
+        }
+
         Node<T> temp = hode;
-        int indeks = 0;
-        while (!ut){
-            if (temp == verdi) {
-                ut = true;
-            } else {
-                temp = temp.neste;
-                indeks++;
-            } //Verdi er funnet ut=true
-            if (ut=true){
-                if (indeks == 0) { //på starten
-                    if (temp==hale){ //blir tom
-                        hode=null;// kanskje overflødig
-                        hale=null;
+        while (temp!=null){ //kjører til slutten
+            if (temp.verdi.equals(verdi)) { //jeg finner verdi
+                if (temp == hode) { //på starten
+                    if (temp == hale) { //blir tom
+                        hode = null;
+                        hale = null;
                     } else { //blir ikke tom
                         hode = temp.neste;
-                        hode.forrige=null;
+                        hode.forrige = null;
+                        //hode neste finns
+                        //neste skal peke på hode
                     }
-                } else if (indeks == antall-1) {//slutten
-                    hale=temp.forrige;
-                    hale.neste=null;
+                } else if (temp == hale) {//slutten
+                        hale = temp.forrige;
+                        hale.neste = null;
                 } else {// midt i en plass
                     Node<T> venstre = temp.forrige;
                     Node<T> høyre = temp.neste;
 
-                    venstre.neste=høyre;
-                    høyre.forrige=venstre;
+                    venstre.neste = høyre;
+                    høyre.forrige = venstre;
                 }
-                temp.neste=null;
-                temp.forrige=null;
+                temp.neste = null;
+                temp.forrige = null;
 
-                endringer++; antall--;
-
+                endringer++;
+                antall--;
+                return true;
+                }
+            temp = temp.neste;
             }
-        }
-
-
-        //starten
-        //ett element
-        //midten
-        //slutten
-        //tom // inneholder ikek elementet
-
-
-
+        return false;
 
         //• Lag metoden public boolean fjern(T verdi), som prøver å fjerne første
         //instans av verdien verdi. Den returnerer true dersom den finner og fjerner
@@ -444,8 +435,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //antall og endringer må oppdateres ved at antall reduseres og endringer
         //økes, dersom noe fjernes.
         //4
-        return ut;
-
     }
 
     // Oppgave 7  Ikke obligatorisk
