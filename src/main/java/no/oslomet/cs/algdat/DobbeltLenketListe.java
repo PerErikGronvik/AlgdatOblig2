@@ -192,30 +192,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Oppgave 4
     @Override
     public int indeksTil(T verdi) {
-        //tenk Finn indeks til verdi
-        int ut = -1;
+        int ut = -1; //verdien finnes ikke settes som default
         for (int i = 0; i < antall; i++) {
             if (hent(i).equals(verdi)) {
                 ut = i;
                 break;
             }
         }
-        //returnerer indeksen
-        //til første element med den gitte verdien i lista, eller −1 dersom verdien ikke
-        //finnes i lista. Det skal ikke kastes et unntak dersom verdi er null.
-        return ut;
+        return ut;//returnerer indeksen eller -1
     }
 
     @Override
     public boolean inneholder(T verdi) {
-        //boolean ut=true;
-        //if (indeksTil(verdi) == -1) {
-        //   return false;
-        //}
-        //som returnerer
-        //true dersom den gitte verdien finnes i lista, og false dersom den ikke
-        //finnes i lista. Du kan gjerne bruke indeksTil som hjelpemetode.
-        return indeksTil(verdi) != -1; //is this a crime
+        return indeksTil(verdi) != -1; //bruker indeks til for å sjekke
     }
 
     // Oppgave 5
@@ -223,44 +212,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void leggInn(int indeks, T verdi) {
         indeksKontroll(indeks,true);
         Objects.requireNonNull(verdi,"Nullverdi er ikke godtatt");
-        // velg noder og gi de navn.
-        Node<T> nyNode = new Node<>(verdi);
-        if (indeks == 0 ) { //starten
-            if (antall==0){//tom
+        Node<T> nyNode = new Node<>(verdi);         // Lager noden
+        if (indeks == 0 ) {                         // starten
+            if (hode==null){            // Egen kode for å legge inn i tom liste
             hode = nyNode;
             hale = nyNode;
-            } else { // ikke tom
+            } else {                   // ikke tom
             nyNode.neste=hode;
             hode.forrige=nyNode;
             hode=nyNode;
-        }}  else if (indeks == antall) { //slutten Her skal det vær antall -1 men tror det er feil i fasiten.
+        }}  else if (indeks == antall) {            //slutten Her skal det vær antall -1 men tror det er feil i fasiten.
             nyNode.forrige = hale;
             hale.neste = nyNode;
             hale = nyNode;
-        } else {// midt i
+        } else {                       // midt i
+            // Henter noder og gir de navn.
             Node<T> høyre = finnNode(indeks);
             Node<T> venstre = høyre.forrige;
-            //sett inn ny node
 
+            // Sett inn ny node
             venstre.neste = nyNode;
             høyre.forrige = nyNode;
             nyNode.forrige=venstre;
             nyNode.neste=høyre;
-
-
         }
-
-
-        //som legger inn verdi i lista på posisjon indeks. Alle andre verdier vil da
-        //flyttes videre til neste indeks. Pass på at metoden kan legge inn i tom liste,
-        //i starten av liste, i slutten av liste, og i midten av liste. Bruk metoden
-        //indeksKontroll(int indeks, boolean leggInn) til å sjekke at den insendte
-        //indeksen er en lovlig indeks. Siden vi her skal legge noe inn i lista, settes leggInn
-        //til true.
-        //Pass på at alle noder får riktige pekere i alle tilfeller, også om en ny verdi
-        //plasseres først eller sist. Pass også på at både antall og endringer økes når en
-        //verdi legges til. Det skal fremdeles ikke være lov å legge inn nullpekere i lista, og
-        //dette skal kaste en NullPointerException
         antall++;
         endringer++;
     }
