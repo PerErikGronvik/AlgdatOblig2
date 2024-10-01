@@ -19,9 +19,13 @@ Søkte opp hva stringbuilder var og fant noe på Geeks for geeks. Bruker ut.appe
 For å legge inn en ny node bakerst, Sjekker om den er tom, og setter da evt hode og hale til den ny noden. else setter inn i en liste ved å sette inn nyNode. Oppdaterer pekeren forrige til den gamle halen. setter neste til å være null. setter hale neste til å peke på den nye noden. Setter halepekeren til den nå ny noden som er bakerst.  
 
 # Oppgave 3
-
+i private node<T> finnNode(int indeks) Laget en sjekk som fant om indeksen er mindre enn halvparten. Og kjørte en forløkke i hver av resultatene.
+public T hent(int indeks) - Akkurat det som står.
+public T oppdater() - henter noden, lagrer gammel verdi, legger inn ny verdi og returnerer gammel verdi.
+public Liste<T> subliste() - henter første noden, bruker en løkke til å følge noden og legge inn verdiene i den nye noden, med leggInn funksjonen. Hvis tid kunne jeg sett i fratilKontroll og leggInn for å se etter optimaliseringer.
 
 # Oppgave 4
+
 
 # Oppgave 5
 

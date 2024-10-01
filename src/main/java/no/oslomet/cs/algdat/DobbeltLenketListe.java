@@ -97,10 +97,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public String omvendtString() {
-        //Lag metoden public String omvendtString(). Den skal returnere
-        //en tegnstreng med listens verdier i motsatt rekkefølge, omringet av
-        //klammeparenteser. Metoden skal lage strengen ved å følge forrige-pekerne
-        //i lista.
 
         StringBuilder ut = new StringBuilder();
         ut.append("[");
@@ -130,8 +126,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //legg til node bakerst i listen
         if (antall==0) { //Settes inn i tom liste
-            hode=nyNode;
-            hale=nyNode;
+            hode=nyNode; hale=nyNode;
         }else { //Settes inn i vanlig liste
             nyNode.forrige = hale;
             nyNode.neste = null;
@@ -147,83 +142,51 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     // Oppgave 3
     private Node<T> finnNode(int indeks) {
-        //Lag den private metoden private Node<T> finnNode(int indeks), som
-        //– Dersom indeksen er mindre enn halvparten av antallet, skal metoden
-        //starte fra hodet og følge neste-pekere.
         Node<T> ut=null;
-        if (indeks < (antall / 2)) { //rundes ned.
+        if (indeks < (antall / 2)) {//indeksen er mindre enn halvparten av antallet
             ut = hode;
             for (int i = 0; i < indeks; i++) { //index 0=hode index 1= nr1 -> stop pga i=indexs
                 ut=ut.neste; // gå framover fra hode
             }
-        }
-        //– Dersom indeksen er større enn eller lik halvparten av antallet, skal
-        //metoden starte fra halen, og følge forrige-pekere.
-        if (indeks >= ( antall / 2)) { //rundes ned
+        } else { // Indeksen er lik eller større enn halvparten
             ut = hale;
             for (int i = antall-1; i > indeks; i--) { // index siste = hale
                 ut=ut.forrige; // gå bakover fra hale
             }
         }
-
-        //returnerer noden med den gitte posisjonen.
-        return ut;
+        return ut; //returnerer noden med den gitte posisjonen.
     }
 
     @Override
     public T hent(int indeks) {
-        // Bruk meto-
-        //den indeksKontroll(int indeks, boolean leggInn) som er arvet fra
-        //Liste til å sjekke at den innsendte indeksen er en lovlig indeks.
-        // Siden vi ikke
-        //skal legge noe inn i lista, settes leggInn til false.
-        indeksKontroll(indeks,false); //åja den leggInn
-
-        //Lag metoden public T hent(int indeks), som henter ut verdi-
-        //en på den gitte posisjonen, ved hjelp av finnNode.
-        Node<T> ut = finnNode(indeks);
-        return ut.verdi;
+        indeksKontroll(indeks,false); // er indeksen gyldig
+        return finnNode(indeks).verdi; //returner verdien
     }
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        // Nullverdihåndtering
         Objects.requireNonNull(nyverdi,"Ikke lov å legge inn null verdi");
-        // Sjekker etter lovlig indeks
-        indeksKontroll(indeks,false);
+        indeksKontroll(indeks,false); //er indeksen gyldig
 
-        //Lagrer gammel verdi og oppretter
-        Node<T> erstatt= finnNode(indeks);
-        T ut=erstatt.verdi;
-        erstatt.verdi = nyverdi;
-        //erstatt index
+        Node<T> erstattes= finnNode(indeks); // henter noden
+        T ut=erstattes.verdi; // lagrer gammel verdi
+        erstattes.verdi = nyverdi; //legger inn ny verdi
 
-        //Lag metoden public T oppdater(int indeks, T nyverdi), som erstat-
-        //ter verdien på plass indeks med nyverdi, og returnerer det som lå der før.
-        //Husk å sjekke etter lovlige indekser. Variabelen endringer skal økes når lista
-        //oppdateres.
         endringer++;
-        return ut;
+        return ut; //returnerer gammel verdi
     }
 
 
     public Liste<T> subliste(int fra, int til) {
-
-        fraTilKontroll(fra, til);
-        //generer liste
-        DobbeltLenketListe<T> nyListe= new DobbeltLenketListe<>();
+        fraTilKontroll(fra, til); //sjekker indeksene er lovlige
+        DobbeltLenketListe<T> nyListe= new DobbeltLenketListe<>();//generer liste
+        Node<T> temp = finnNode(fra); //henter første noden.
 
         for (int i = fra; i < til; i++) {
-            nyListe.leggInn(hent(i));
+            nyListe.leggInn(temp.verdi); // legger inn verdien fra noden
+            temp= temp.neste; // flytter til neste node.
         }
-
-        // som re-turnerer en ny liste (en instans av DobbeltLenketListe) som inneholder
-        //verdiene i det halvåpne intervallet [fra, til⟩ fra lista denne kalles fra. Bruk
-        //metoden fraTilKontroll(int fra, int til) for å sjekke om indeksene
-        //er lovlige. Et tomt intervall er lovlig, og skal gi ut en tom liste. Pass på at
-        //den nye lista har riktig antall.
-
-        return nyListe;
+        return nyListe; //returnerer listen
     }
 
     // Oppgave 4
