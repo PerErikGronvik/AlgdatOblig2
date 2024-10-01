@@ -387,15 +387,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         boolean ut = false;
         Node<T> temp = hode;
+        int indeks = 0;
         while (!ut){
             if (temp == verdi) {
                 ut = true;
             } else {
                 temp = temp.neste;
+                indeks++;
+            } //Verdi er funnet ut=true
+            if (ut=true){
+                if (indeks == 0) { //på starten
+                    if (temp==hale){ //blir tom
+                        hode=null;// kanskje overflødig
+                        hale=null;
+                    } else { //blir ikke tom
+                        hode = temp.neste;
+                        hode.forrige=null;
+                    }
+                } else if (indeks == antall-1) {//slutten
+                    hale=temp.forrige;
+                    hale.neste=null;
+                } else {// midt i en plass
+                    Node<T> venstre = temp.forrige;
+                    Node<T> høyre = temp.neste;
+
+                    venstre.neste=høyre;
+                    høyre.forrige=venstre;
+                }
+                temp.neste=null;
+                temp.forrige=null;
+
+                endringer++; antall--;
+
             }
         }
 
-        if ()
 
         //starten
         //ett element
