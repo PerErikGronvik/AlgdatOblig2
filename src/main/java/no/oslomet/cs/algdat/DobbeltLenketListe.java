@@ -1,9 +1,7 @@
 package no.oslomet.cs.algdat;
 
 import java.awt.geom.IllegalPathStateException;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
     // Innebygd (Trenger ikke endres)
@@ -461,15 +459,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Iterator<T> iterator() {
         //Lag metoden public Iterator<T> iterator() i DobbeltLenketListe,
         //som returnerer en instans av iteratoren.
-        throw new UnsupportedOperationException();
+        return new DobbeltLenketListeIterator();
     }
 
     public Iterator<T> iterator(int indeks) {
         //Lag metoden public Iterator<T> iterator(int indeks), som først
         //sjekker om indeks er en lovlig indeks, og så returnerer en instans av
         //iteratorklassen som starter på den gitte indeksen
-
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks,false);
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -484,10 +482,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks) {
+            denne=finnNode(indeks);         // Starter på indeks
+            kanFjerne = false;              // Settes true når next() kalles
+            iteratorendringer = endringer;  // Teller endringer
+
             //ag konstruktøren private DobbeltLenketListeIterator(int indeks).
             //Den skal sette nodepekeren denne til å peke på noden på plass indeks, og
             //ellers gjøre det samme som private DobbeltLenketListeIterator()
-            throw new UnsupportedOperationException();
+
         }
 
         @Override
@@ -497,13 +499,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() {
+            if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException("Iteratorendringer er ikke lik endringer");
+            }
+            if (!hasNext()) {
+                throw new NoSuchElementException("Det er ikke flere elementer igjen i listen");
+            }
+
+            kanFjerne=true;
+            T ut= denne.verdi;
+            denne= denne.neste;
+            return ut;
             //Lag metoden public T next() i DobbeltLenketListeIterator. Den
             //skal først sjekke om iteratorendringer er lik endringer, og om de er
-            //forskjellige skal man kaste en ConcurrentModificationException. Den
-            //skal kaste en NoSuchElementException om det ikke er flere elementer igjen
+            //forskjellige skal man kaste en ConcurrentModificationException.
+            // Den skal kaste en NoSuchElementException om det ikke er flere elementer igjen
             //i listen. Deretter må den sette kanFjerne til true. Verdien til noden denne
             //må returneres, og denne må settes til neste node i lista.
-            throw new UnsupportedOperationException();
         }
 
         // Oppgave 9: Ikke obligatorisk
