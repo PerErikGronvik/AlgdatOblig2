@@ -11,18 +11,15 @@ Denne oppgaven er en innlevering i DATS2300 - Algoritmer og datastrukturer. Den 
 ## Oppgavebeskrivelser
 
 # Oppgave 1
-
-Jeg startet med å være veldig forvirret. Det virket ikke som om oppgaven var ferdigskrevet. Jeg brukte generate constructor, men denne var lite hjelpsom. 
-// Det kan være fristende bygge opp listen ved gjentatte kall på metoden
-leggInn() som vi skal kode i Oppgave 2. Dette skal man ikke gjøre, konstruktøren
-skal kodes direkte. Dette er fordi dersom man senere lagde en subklasse av
-DobbeltLenketListe og overskrev LeggInn() kunne det medført at konstruktøren
-ikke lenger virket. //
+I begge de første oppgavene starter jeg med å lage en tom liste. En for løkke lager nye noder, som gies en verdi av tabellen og settes inn i den lenkede listen. det er en if løkke som tar seg av den første noden. Løkken itterer igjennom tabellen og oppdaterer antall. Effektivisering. her kunne en while løkke funnet det første elementet og sendt startpunktet til forløkken som i+1 inn i for løkken. Dette ville unngått en if operasjon for hver løkke.
 
 # Oppgave 2
-I oppgave 2 gjorde vi ...
+Søkte opp hva stringbuilder var og fant noe på Geeks for geeks. Bruker ut.append(verdi.verdi) for å lagre alle verdiene. ut.toString(), bygger srtengen til slutt. omvendt, er en kopi av første kode, men motsatt vei. If løkkene gjør ingenting hvis den er null. 
+
+For å legge inn en ny node bakerst, Sjekker om den er tom, og setter da evt hode og hale til den ny noden. else setter inn i en liste ved å sette inn nyNode. Oppdaterer pekeren forrige til den gamle halen. setter neste til å være null. setter hale neste til å peke på den nye noden. Setter halepekeren til den nå ny noden som er bakerst.  
 
 # Oppgave 3
+
 
 # Oppgave 4
 
@@ -33,14 +30,6 @@ I oppgave 2 gjorde vi ...
 # Oppgave 7  (Ikke obligatorisk)
 
 # Oppgave 8
-// Når dette er kodet, vil forEach-løkker fungere med klassen vår uten at vi
-trenger gjøre noe. Du kan sjekke at følgende kode virker:
-String[] frukt = {"Eple", "Pære", "Banan", "Mango", "Drue"};
-Liste<String> liste = new DobbeltLenketListe<>(frukt);
-for (String s : liste) System.out.print(s + " ");
-// Dette skal printe:
-// Eple Pære Banan Mango Drue
-//
 
 # Oppgave 9  (Ikke obligatorisk)
 

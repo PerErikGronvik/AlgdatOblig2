@@ -38,39 +38,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     // Oppgave 1
-    public DobbeltLenketListe() {
-        antall = 0;
-        endringer = 0;
-        //Lag konstruktøren public DobbeltLenketListe() så den genererer en tom
-        //dobbelt lenket liste
+    public DobbeltLenketListe() {//genererer en tom dobbelt lenket liste
+        antall = 0; endringer = 0;
     }
 
-    public DobbeltLenketListe(T[] a) { // T for type, fordi type ville vært for selvforklarende.
+    public DobbeltLenketListe(T[] a) {
         Objects.requireNonNull(a,"a er null");
-        //tom liste
-        antall = 0;
-        endringer = 0;
+        antall = 0;  endringer = 0; //tom liste
 
-        // legger arrayet inn en dobbel lenket liste, hopper over nullverdier.
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] != null) { // hopper over null verdier
-                Node<T> nyNode= new Node(a[i]); //definerer noden vi skal bruke
+        for (int i = 0; i < a.length; i++) { // legger arrayet inn en dobbel lenket liste, hopper over nullverdier.
+            if (a[i] != null) {                                // hopper over null verdier
+                Node<T> nyNode= new Node<T>(a[i]);                //definerer noden vi skal bruke
 
                 if (hode == null) { //dette er den første noden
-                    //Er bare denne noden derfor er den hale og hode
-                    hode = nyNode;
-                    hale = nyNode;
-                    // Har ingen adjecent noder.
-                    nyNode.forrige = null;
-                    nyNode.neste = null;
-                } else { // dette er en ny ikke null node
-                    // Oppdaterer nodens pekere
-                    nyNode.forrige = hale;
-                    nyNode.neste = null;
-                    // Oppdaterer forrige peker, som er lagret i hale
-                    hale.neste=nyNode;
-                    // Nå som vi er ferdige setter vi Noden til å være halen
-                    hale = nyNode;
+                    hode = nyNode; hale = nyNode;              //Er bare denne noden derfor er den hale og hode
+                    nyNode.forrige = null;nyNode.neste = null; //har ingen adjacent noder
+                } else { // en ny ikke null node
+                    nyNode.forrige = hale; nyNode.neste = null; // Oppdaterer nodens pekere
+                    hale.neste=nyNode;                          // Oppdaterer gammel peker, som er lagret i hale
+                    hale = nyNode;                              // Nå som vi er ferdige setter vi Noden til å være halen
                 }
                 antall++;
             }
@@ -78,48 +64,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public int antall() {
-
-        //Lag metoden public int antall(), som skal returnere antall verdier i lista.
-        return antall;
-    }
+    public int antall() { return antall; }//returnere antall verdier i lista.
 
     @Override
-    public boolean tom() {
-        //Lag metoden public boolean tom(), som skal returnere true dersom lista
-        //er tom, og false dersom den ikke er tom.
-        return antall == 0; //  En logisk sammenligning returnerer tue eller false
-    }
+    public boolean tom() { return antall == 0; } //  En logisk sammenligning returnerer true eller false om listen er tom
 
     // Oppgave 2
     @Override
-    public String toString() {
-        // Den skal returnere en tegnstreng
-        // med listens verdier, omringet av klammeparenteser. Om lista er tom, får man
-        // da "[]", og om lista inneholder verdiene 1, 2, og 3, får man da "[1, 2, 3]".
-        // Merk mellomrom etter komma. Metoden skal lage strengen ved å følge neste-
-        // pekerne i lista.
-        // 2
-
-
+    public String toString() { // returnere en tegnstreng med listens verdier, omringet av klammeparenteser
 
         // OBS
         // Bruk stringbuilder
         // StringBuilder str = new StringBuilder();
         // str.append("GFG"); fra Geeks for geeks
         // sout(str.toString())
-        StringBuilder ut = new StringBuilder();
-        ut.append("[");
 
         Node<T> temp = hode;
 
-        for (int i = 0; i < antall; i++) {
-            if (i==0){
-                ut.append(temp.verdi);
+        StringBuilder ut = new StringBuilder();
+        ut.append("[");
 
-            } else {
-                ut.append(", ").append(temp.verdi);
-            }
+        for (int i = 0; i < antall; i++) {                  //
+            if (i==0){ ut.append(temp.verdi); }             //
+            else { ut.append(", ").append(temp.verdi); }    //
+
             if (temp.neste != null){// sjekker om det er en neste node
                 temp = temp.neste;//flytter til neste node
             }
@@ -142,7 +110,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         for (int i = 0; i < antall; i++) {
             if (i==0){
                 ut.append(temp.verdi);
-
             } else {
                 ut.append(", ").append(temp.verdi);
             }
@@ -156,15 +123,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        //Lag metoden public boolean leggInn(T verdi). Den skal kaste en
-        //NullPointerException dersom du prøver legge inn en null-verdi, og ellers
-        //legge til en ny node med oppgitt verdi bakerst i listen, og returnere true. Øk
-        //variabelen endringer hver gang en ny verdi legges inn
+
         Objects.requireNonNull(verdi,"Ikke lov å legge inn null verdi");
 
-        //Temp variabel
-        Node<T> nyNode= new Node<>(verdi);
-
+        Node<T> nyNode= new Node<>(verdi); //Temp variabel
 
         //legg til node bakerst i listen
         if (antall==0) { //Settes inn i tom liste
