@@ -32,13 +32,18 @@ inneholder - Bruker indeksTil for å sjekke. Det ville vært marginalt mer effek
 Metoden lager en node som den skal legge inn. For å finne ut hvor og hvordan brukes en if stamenet som deler inn i om noden skal inn i start, slutt eller noensted midt i. Starten deles videre inn i to scenarioer med en if statment, hvis listen er tom er hode=null da skal hode og hale peke på den nye noden. Hvis den ikke er tom, vet vi at hode peker på en node og vi kan legge inn noden og forandre pekeren. Hvis det er på slutten så vet vi at den har en venstrepeker, fordi tom er allerede ivaretatt. Midt i her, henter jeg nodene og gir de navn. Det gjør det enkelt å sette inn. endrer pekerne fra de gamle nodene slik at de peker på den nye og så endrer jeg den nye nodens pekere slik at den peker på de gamle. 
 
 # Oppgave 6
+fjern indeks - Finner noden som skal slettes med finnNode(). Hvis noden er først i listen, oppdateres hode til neste node, og forrige-pekeren til null hvis listen ikke blir tom. Hvis noden er sist i listen, oppdateres hale til forrige node, og neste-pekeren settes til null. For noder i midten kobles nodens forrige og neste noder sammen.Noden fjernes ved å sette neste og forrige til null, og antall reduseres. Returnerer verdien av noden som ble slettet.
+fjern verdi - Søker gjennom listen fra hode. Hvis verdien finnes, fjerner noden. Hvis noden er først, oppdateres hode til neste node. Hvis listen blir tom, settes både hode og hale til null. Hvis noden er sist, oppdateres hale til forrige node og setter neste til null. Hvis noden er i midten, kobles forrige og neste noder sammen. Noden fjernes ved å sette pekere til null, oppdaterer antall og endringer, og returnerer true. Hvis verdien ikke finnes, returneres false.
 
+Har ikke kodet dem ved hjelp av hverandre. fjern(indeks) bruker indekstilgang som er O(n/2), dette kan ikke verdi gjøre. Derfor feiler testen iblandt.
 
 # Oppgave 7  (Ikke obligatorisk)
 
 
 # Oppgave 8
-
+iterator() returnerer en iterator som starter på hode. iterator(int indeks) starter iteratoren på gitt indeks etter å ha sjekket at indeksen er gyldig.
+DobbeltLenketListeIterator implementerer Iterator<T>. Den ene konstruktøren starter på hode, den andre på en gitt indeks med finnNode().
+hasNext() sjekker om det er flere noder igjen. next() kaster ConcurrentModificationException hvis listen har endret seg, eller NoSuchElementException hvis ingen elementer gjenstår. Den returnerer verdien til den nåværende noden og flytter til neste node.
 
 # Oppgave 9  (Ikke obligatorisk)
 

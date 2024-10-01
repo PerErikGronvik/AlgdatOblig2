@@ -244,12 +244,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T fjern(int indeks) {
 
-        //fjerner og returnerer
-        //verdien på posisjon indeks. Du skal kaste IndexOutOfBoundsException
-        //om du prøver fjerne en indeks som ikke eksisterer.
-        //må derfor kodes direkte.
-        //return;
-        //Må kodes manuelt og throw index out of bounds.
         indeksKontroll(indeks,false);
 
         // velg noder og gi de navn.
@@ -320,19 +314,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             temp = temp.neste;
             }
         return false;
-
-        //• Lag metoden public boolean fjern(T verdi), som prøver å fjerne første
-        //instans av verdien verdi. Den returnerer true dersom den finner og fjerner
-        //verdien, og false dersom den ikke finner verdien.
-        //Det kan være fristende å kode fjern(T verdi) ved hjelp av indeksTil(T verdi)
-        //og fjern(int indeks), men dette medfører at vi løper gjennom lista to ganger i
-        //stedet for én gang. Metoden fjern(T verdi) må derfor kodes direkte.
-        //Pass på at metodene fungerer på en tom liste, på en liste med ett element, om
-        //første element fjernes, om siste element fjernes, og om et element i slutten fjernes.
-        //Noden som fjernes bør sette sine forrige og neste-pekere til null. Verdiene
-        //antall og endringer må oppdateres ved at antall reduseres og endringer
-        //økes, dersom noe fjernes.
-        //4
     }
 
     // Oppgave 7  Ikke obligatorisk
@@ -357,15 +338,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        //Lag metoden public Iterator<T> iterator() i DobbeltLenketListe,
-        //som returnerer en instans av iteratoren.
         return new DobbeltLenketListeIterator();
     }
 
     public Iterator<T> iterator(int indeks) {
-        //Lag metoden public Iterator<T> iterator(int indeks), som først
-        //sjekker om indeks er en lovlig indeks, og så returnerer en instans av
-        //iteratorklassen som starter på den gitte indeksen
         indeksKontroll(indeks,false);
         return new DobbeltLenketListeIterator(indeks);
     }
@@ -381,22 +357,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             iteratorendringer = endringer;  // Teller endringer
         }
 
-        private DobbeltLenketListeIterator(int indeks) {
-            denne=finnNode(indeks);         // Starter på indeks
-            kanFjerne = false;              // Settes true når next() kalles
-            iteratorendringer = endringer;  // Teller endringer
-
-            //ag konstruktøren private DobbeltLenketListeIterator(int indeks).
-            //Den skal sette nodepekeren denne til å peke på noden på plass indeks, og
-            //ellers gjøre det samme som private DobbeltLenketListeIterator()
-
-        }
-
-        @Override
-        public boolean hasNext() { //ferdig ikke rør
-            return denne != null;
-        }
-
         @Override
         public T next() {
             if (iteratorendringer != endringer) {
@@ -407,15 +367,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
 
             kanFjerne=true;
-            T ut= denne.verdi;
-            denne= denne.neste;
+            T ut= denne.verdi; // lagerer gammel verdi
+            denne= denne.neste; // overskriver
             return ut;
-            //Lag metoden public T next() i DobbeltLenketListeIterator. Den
-            //skal først sjekke om iteratorendringer er lik endringer, og om de er
-            //forskjellige skal man kaste en ConcurrentModificationException.
-            // Den skal kaste en NoSuchElementException om det ikke er flere elementer igjen
-            //i listen. Deretter må den sette kanFjerne til true. Verdien til noden denne
-            //må returneres, og denne må settes til neste node i lista.
+        }
+
+        private DobbeltLenketListeIterator(int indeks) {
+            denne=finnNode(indeks);         // Starter på indeks
+            kanFjerne = false;              // Settes true når next() kalles
+            iteratorendringer = endringer;  // Teller endringer
+        }
+
+        @Override
+        public boolean hasNext() { //ferdig ikke rør
+            return denne != null;
         }
 
         // Oppgave 9: Ikke obligatorisk
