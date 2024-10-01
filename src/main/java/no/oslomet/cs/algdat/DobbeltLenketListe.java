@@ -386,41 +386,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean fjern(T verdi) {
         boolean ut = false;
-
-        //indeks til metoden
-            int indeks = -1;
-            for (int i = 0; i < antall; i++) {
-                if (hent(i).equals(verdi)) {
-                    ut = true;
-                    indeks=i;
-                    Node<T> slettNode =;
-
-                    if (indeks == 0 ) { //starten
-                        hode = slettNode.neste;
-                        if(hode != null){ //listen er ikke blitt tom
-                            hode.forrige=null;
-                        }
-                    }  else if (indeks == antall-1) { //slutten
-                        hale = slettNode.forrige;
-                        //tom liste er håndtert
-                        hale.neste=null;
-                    } else { //midten
-                        Node<T> venste = slettNode.forrige;
-                        Node<T> høyre =  slettNode.neste;
-
-                        venste.neste= høyre;
-                        høyre.forrige = venste;
-                    }
-                    slettNode.neste=null;
-                    slettNode.forrige=null;
-                    if (ut = true) {
-                        antall--;
-                        endringer++;
-                    }
-
-                    break;
-                }
+        Node<T> temp = hode;
+        while (!ut){
+            if (temp == verdi) {
+                ut = true;
+            } else {
+                temp = temp.neste;
             }
+        }
+
+        if ()
+
+        //starten
+        //ett element
+        //midten
+        //slutten
+        //tom // inneholder ikek elementet
 
 
 
