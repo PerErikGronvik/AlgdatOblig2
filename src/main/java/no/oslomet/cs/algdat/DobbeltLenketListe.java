@@ -40,7 +40,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Oppgave 1
     public DobbeltLenketListe() {//genererer en tom dobbelt lenket liste
         antall = 0; endringer = 0;
-    }
+    } //O(1)
 
     public DobbeltLenketListe(T[] a) {
         Objects.requireNonNull(a,"a er null");
@@ -61,7 +61,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 antall++;
             }
         }
-    }
+    } // O(n) fordi løkken kjører n ganger for hvert element og resten av operasjonene er O(1)
 
     @Override
     public int antall() { return antall; }//returnere antall verdier i lista.
@@ -94,7 +94,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         ut.append("]");
         return ut.toString();
-    }
+    } // O(n)
 
     public String omvendtString() {
 
@@ -115,7 +115,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         ut.append("]");
         return ut.toString();
-    }
+    } //O(n)
 
     @Override
     public boolean leggInn(T verdi) {
@@ -138,7 +138,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer++;
         antall++;
         return true;
-    }
+    } //O(1)
 
     // Oppgave 3
     private Node<T> finnNode(int indeks) {
@@ -155,7 +155,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
         return ut; //returnerer noden med den gitte posisjonen.
-    }
+    } //O(n/2) // som er O(n)
 
     @Override
     public T hent(int indeks) {
